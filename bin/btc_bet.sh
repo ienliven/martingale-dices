@@ -14,7 +14,7 @@ BETS[9]="1bonesF1NYidcd5veLqy1RZgF4mpYJWXZ"; # 50%
 # BETS[6]="1bonesPdRYS91Mq9arbiUratHy2J5gDut"; # 93.75%
 # BETS[7]="1bonesPdRYS91Mq9arbiUratHy2J5gDut"; # 93.75%
 
-# FIFTY="1bones5gF1HJeiexQus6UtvhU4EUD4qfj";
+FIFTY="1bonesF1NYidcd5veLqy1RZgF4mpYJWXZ"; # 50% bet address
 
 BASE_BET="$1";
 if [ -z "$BASE_BET" ]; then
@@ -25,15 +25,11 @@ ROUND="$2";
 if [ -z "$ROUND" ]; then
     ROUND="1";
 fi;
-FIFTY=${BETS[$ROUND]};
+
+# FIFTY=${BETS[$ROUND]};
 EXP=$(echo "$ROUND-1" | bc);
 
 BET=$(echo "($BASE_BET*(2^$EXP))" | bc | sed 's/^\./0./g');
-if [[ "$ROUND" == "2" && "$FIFTY" == "1bones5gF1HJeiexQus6UtvhU4EUD4qfj" ]]; then
-    SUM=$(echo "$BASE_BET*0.5" | bc);
-    BET=$(echo "$BET+$SUM" | bc | sed 's/^\./0./g');
-fi;
-
 TXID=$(bitcoind sendfrom "" "$FIFTY" "$BET");
 
 if [ -z "$TXID" ]; then 

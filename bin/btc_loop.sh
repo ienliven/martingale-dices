@@ -3,10 +3,9 @@
 cd "$( dirname "${BASH_SOURCE[0]}" )";
 
 ROUND="0";
+MAX_ROUND="7";
 
-MAX_ROUND="6";
-
-BET="0.0015";
+BET="0.001";
 
 STATUS="LOOSER";
 
