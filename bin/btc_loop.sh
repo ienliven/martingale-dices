@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$( dirname "${BASH_SOURCE[0]}" )";
+
 ROUND="0";
 
 MAX_ROUND="6";
@@ -12,14 +14,17 @@ MIN_BAL=$( echo "2^$MAX_ROUND * $BET" | bc | sed 's/^\./0./g');
 BALANCE=$(btc_balance.sh);
 
 shout_lost () {
-    afplay ~/usr/sounds/lost.wav;
+    if [ -x /usr/bin/afplay ]; then
+        /usr/bin/afplay ./sounds/lost.wav;
+    fi;
 }
 
 shout_win () {
     echo "You won!";
     echo;
-    
-    afplay ~/usr/sounds/coin.wav;
+    if [ -x /usr/bin/afplay ]; then
+        /usr/bin/afplay ./sounds/coin.wav;
+    fi;
 }
 
 is_gt () {
